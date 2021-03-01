@@ -46,7 +46,6 @@ export default function Login() {
       })
       .catch((err) => {
         try {
-          if (typeof err != "undefined") console.log("Loginjs loginUser catch error:\n", err);
           if (typeof err.response.data != "undefined") {
             setError(err.response.data);
             showAlert({ 
@@ -77,7 +76,7 @@ export default function Login() {
         <Col sm="12" md={{ size: 5, offset: 3 }}>
           <div className="signup_paper">
             <div className="signup_header">
-              <img src={`${url}/uploads/logo.png`} alt="strapi header img" />
+              <img src={`${url}/uploads/logo.png`} alt="strapi header img" classNam="signup_signin_img" />
             </div>
             <section className="wrapper">
               { error && error.length !== 0 &&
