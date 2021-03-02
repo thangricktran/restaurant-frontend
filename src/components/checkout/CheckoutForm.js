@@ -18,6 +18,7 @@ function CheckoutForm() {
     stripe_id: "",
   });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
   const { user, setConfirmedOrder, setCustomerOrder, showAlert } = 
@@ -35,6 +36,7 @@ function CheckoutForm() {
   async function submitOrderHandler(event) {
     showAlert({ msg: "submitting order... please wait" });
     event.preventDefault();
+    setLoading(true);
     // // Use elements.getElement to get a reference to the mounted Element.
     const cardElement = elements.getElement(CardElement);
 
@@ -48,14 +50,17 @@ function CheckoutForm() {
     await submitOrder( 
       { data, total, items: [...cart], stripeTokenId: token.token.id, userToken } 
     ).then(function(response) {
+      setLoading(false);
       return response.data;
     }).then(function(respData) {
       setConfirmedOrder();
       setCustomerOrder(respData);
       clearCart();
+      setLoading(false);
       history.push("/orderhistory");
       return respData;
     }).catch((err) => {
+      setLoading(false);
       try {
         if (typeof err != "undefined") {
           // console.log("CheckoutFormsjs submitOrderHandler() catch err:\n", err);
@@ -97,7 +102,7 @@ function CheckoutForm() {
         </div>
       </FormGroup>
 
-      <CardSection data={data} stripeError={error} submitOrder={submitOrderHandler} />
+      <CardSection loading={loading} data={data} stripeError={error} submitOrder={submitOrderHandler} />
     </div>
   );
 }
