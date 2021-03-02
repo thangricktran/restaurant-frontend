@@ -33,6 +33,7 @@ function CheckoutForm() {
   }
 
   async function submitOrderHandler(event) {
+    showAlert({ msg: "submitting order... please wait" });
     event.preventDefault();
     // // Use elements.getElement to get a reference to the mounted Element.
     const cardElement = elements.getElement(CardElement);

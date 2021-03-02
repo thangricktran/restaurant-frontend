@@ -38,34 +38,20 @@ function OrderHistoryCmpt({order}) {
               Order Date: {order.createdAt}
             </div>
             <section className="wrapper">
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>quantity</th>
-                  <th>restaurant</th>
-                </tr>
-              </thead>
-              <tbody>
-              {order.dishes.map((dish,index) => {
-                return (
-                  <tr key={dish.id}>
-                    <td>{dish.name}</td>
-                    <td>${dish.price.toFixed(2)}</td>
-                    <td className="text_aligned_right">{dish.quantity}</td>
-                    <td>{dish.restaurant}</td>
-                  </tr>
-                );
-              })}
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td>Total:</td>
-                  <td colSpan="3">${totalAmountConversion(order.amount)}</td>
-                </tr>
-              </tfoot>
-            </table>
+            {order.dishes.map((dish,index) => {
+              return (
+                <div key={dish.id}>
+                  <div><span style={{fontWeight: "700"}}>Restaurant:</span> {dish.restaurant}</div>
+                  <div><span style={{fontWeight: "700"}}>Name:</span> {dish.name}</div>
+                  <div><span style={{fontWeight: "700"}}>Price:</span> $ {dish.price.toFixed(2)}</div>
+                  <div><span style={{fontWeight: "700"}}>Quantity:</span> {dish.quantity}</div>
+                  <div style={{height: "16px"}}></div>
+                </div>
+              );
+            })}
+              <div>
+                <div><span style={{fontWeight: "700"}}>Total:</span> $ {totalAmountConversion(order.amount)}</div>
+              </div>
             </section>
           </div>
         </Col>

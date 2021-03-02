@@ -30,8 +30,8 @@ function OrderHistory() {
     setLoading(true);
     setError(false);
     await axios.get(
-      // `${API_URL}/orders?user_id=${user._id}&_sort=createdAt:DESC`, {
-      `${API_URL}/orders?_sort=createdAt:DESC`, {
+      // `${API_URL}/orders?_sort=createdAt:DESC`, {
+      `${API_URL}/orders?user_id=${user.user._id}&_sort=createdAt:DESC`, {
           headers: { Authorization: `Bearer ${userToken}`}
         }
       ).then(function(response) {

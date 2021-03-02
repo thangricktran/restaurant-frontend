@@ -35,7 +35,8 @@ function UserProvider({ children }) {
     if (user.token) {
       setUser(user);
       setIsAuthenticated(true);
-      localStorage.setItem("restaurant_user", JSON.stringify(user));    
+      localStorage.setItem("restaurant_user", JSON.stringify(user));
+      console.log('context user js user.user._id: \n', user.user._id);    
     }
   };
   const userLogout = () => {
