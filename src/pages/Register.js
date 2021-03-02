@@ -66,7 +66,7 @@ const Register = () => {
         <Col sm="12" md={{ size: 5, offset: 3 }}>
           <div className="signup_paper">
             <div className="signup_header">
-              <img src={`${API_URL}/uploads/logo.png`} alt="strapi header img" classNam="signup_signin_img" />
+              <img src={`${API_URL}/uploads/logo.png`} alt="strapi header img" />
             </div>
             <section className="wrapper">
               {error && error.length !== 0 &&

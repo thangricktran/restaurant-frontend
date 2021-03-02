@@ -76,7 +76,7 @@ export default function Login() {
         <Col sm="12" md={{ size: 5, offset: 3 }}>
           <div className="signup_paper">
             <div className="signup_header">
-              <img src={`${url}/uploads/logo.png`} alt="strapi header img" className="signup_signin_img" />
+              <img src={`${url}/uploads/logo.png`} alt="strapi header img" />
             </div>
             <section className="wrapper">
               { error && error.length !== 0 &&
