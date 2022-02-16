@@ -1,13 +1,14 @@
 /* /pages/OrderHistory.js */
 import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+// import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import API_URL from "../utils/URL";
 import {
   Container,
   Row,
   Col,
-  Button,
+  // Button,
 } from "reactstrap";
 import Loading from "../components/Loading";
 import { UserContext } from "../context/user";
@@ -20,9 +21,11 @@ function OrderHistory() {
   const [localCurrentOrder, setLocalCurrentOrder] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const history = useHistory();
+  // const history = useHistory();
   // const { cart, clearCart } = useContext(CartContext);
-  const { isAuthenticated, user, userLogout, currentOrder, setConfirmedOrder, 
+  // const { isAuthenticated, user, userLogout, currentOrder, setConfirmedOrder,
+  //       isConfirmedOrder, setCustomerOrder } = useContext(UserContext);
+  const { isAuthenticated, user, currentOrder, setConfirmedOrder,
         isConfirmedOrder, setCustomerOrder } = useContext(UserContext);
 
   async function getUserOrders() {
@@ -71,6 +74,7 @@ function OrderHistory() {
   if (isAuthenticated && !loading && !error) {
     return (
       <Container>
+{/*
         <Row>
           <Col sm="12" md={{ size: 5, offset: 3 }}>
             <div>
@@ -88,6 +92,7 @@ function OrderHistory() {
             </div>
           </Col>
         </Row>
+*/}
       {localCurrentOrder && (
         <div>
         <CustomerOrder order={localCurrentOrder} />
@@ -99,6 +104,7 @@ function OrderHistory() {
             </div>
           </Col>
         </Row>
+{/*
         <Row>
           <Col sm="12" md={{ size: 5, offset: 3 }}>
             <div>
@@ -124,6 +130,7 @@ function OrderHistory() {
             </div>
           </Col>
         </Row>
+*/}
         </div>
         )}
         {userOrders && userOrders.length < 1 && (

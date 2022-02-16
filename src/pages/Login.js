@@ -1,5 +1,6 @@
 /*  /pages/Login.js */
 import React, { useState, useEffect } from "react";
+import { Controller, useForm } from 'react-hook-form';
 import {
   Container,
   Row,
@@ -18,28 +19,37 @@ import { UserContext } from "../context/user";
 import loginUser from "../strapi/loginUser";
 
 export default function Login() {
+  const {
+    handleSubmit,
+    setValue,
+    control,
+    formState: { errors },
+  } = useForm();
   const history = useHistory();
   // setup user userContext
   const { userLogin, isAuthenticated, showAlert } = React.useContext(UserContext);
-  
+
   // state values
-  const [data, setData] = useState({ identifier: "", password: "" });
+  const [stateData, setStateData] = useState({ identifier: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    showAlert({ msg: 'accessing user data, please wait...' });
+  const handleLoginSubmit = async ({ identifier, password }) => {
+    // e.preventDefault();
+    // showAlert({ msg: 'accessing user data, please wait...' });
+    // console.log("pages/Login.js handleLoginSubmit() identifier: \n", identifier);
+    // console.log("pages/Login.js.js handleLoginSubmit() password: \n", password);
+
     setLoading(true);
     setError(null);
-    const loginCredential = { email: data.identifier, password: data.password };
-    loginUser(loginCredential)
+    const loginCredential = { email: identifier, password: password.trim() };
+    await loginUser(loginCredential)
       .then((res) => {
         const { jwt: token, user } = res.data;
         const { username } = user;
         userLogin({ username, token, user });
         setLoading(false);
-        showAlert({ 
+        showAlert({
           msg: `you are logged in: ${username}. shop away my friend.`
         });
         history.push("/");
@@ -48,7 +58,7 @@ export default function Login() {
         try {
           if (typeof err.response.data != "undefined") {
             setError(err.response.data);
-            showAlert({ 
+            showAlert({
               msg: err.response.data.message[0].messages[0].message,
               type: "danger"
             });
@@ -59,7 +69,7 @@ export default function Login() {
         setLoading(false);
       });
   };
- 
+
   useEffect(() => {
     if (isAuthenticated) {
       history.push("/"); // redirect if you're already logged in
@@ -67,7 +77,12 @@ export default function Login() {
   }, [isAuthenticated, history]);
 
   function onChange(event) {
-    setData({ ...data, [event.target.name]: event.target.value });
+    setStateData({ ...stateData, [event.target.name]: event.target.value });
+    setValue(event.target.name, event.target.value);
+  }
+  function handleForgotPassword(evt) {
+    evt.preventDefault();
+    history.push("/forgotpassword");
   }
 
   return (
@@ -93,41 +108,79 @@ export default function Login() {
                     </div>
                   );
                 })}
-              <Form>
+              <Form onSubmit={handleSubmit(handleLoginSubmit)}>
                 <fieldset disabled={loading}>
                   <FormGroup>
                     <Label>Email:</Label>
-                    <Input
-                      onChange={(event) => onChange(event)}
+                    <Controller
                       name="identifier"
-                      style={{ height: 50, fontSize: "1.2em" }}
-                    />
+                      control={control}
+                      defaultValue=""
+                      rules={{
+                        required: true,
+                        pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                      }}
+                      render={({ field }) => (
+                        <Input
+                          {...field}
+                          id="identifier"
+                          onChange={(event) => onChange(event)}
+                          value={stateData.identifier}
+                          type="email"
+                          name="identifier"
+                          style={{ height: 50, fontSize: "1.2em" }}
+                        />
+                      )}
+                    ></Controller>
+                    {errors.identifier
+                      ? errors.identifier.type === 'pattern'
+                        ? <span style={{color: 'red'}}>Email is not valid.</span>
+                        : <span style={{color: 'red'}}>Email is required.</span>
+                      : ''}
                   </FormGroup>
                   <FormGroup style={{ marginBottom: 30 }}>
                     <Label>Password:</Label>
-                    <Input
-                      onChange={(event) => onChange(event)}
-                      type="password"
+                    <Controller
                       name="password"
-                      style={{ height: 50, fontSize: "1.2em" }}
-                    />
+                      control={control}
+                      defaultValue=""
+                      rules={{
+                        required: true,
+                        minLength: 8,
+                      }}
+                      render={({ field }) => (
+                        <Input
+                          id="password"
+                          onChange={(event) => onChange(event)}
+                          value={stateData.password}
+                          type="password"
+                          name="password"
+                          style={{ height: 50, fontSize: "1.2em" }}
+                        />
+                      )}
+                    ></Controller>
+                    {errors.password
+                      ? errors.password.type === 'minLength'
+                        ? <span style={{color: 'red'}}>Password length should be more than 7.</span>
+                        : <span style={{color: 'red'}}>Password is required.</span>
+                      : ''}
                   </FormGroup>
 
                   <FormGroup>
                     <span>
                       <Button
-                        className="btn btn-succeed btn-text-color">
+                        className="btn btn-succeed btn-text-color"
+                        onClick={handleForgotPassword}
+                      >
                         <small>Forgot Password?</small>
                       </Button>
                     </span>
                     <Button
                       style={{ float: "right", width: 120 }}
                       color="primary"
-                      onClick={(e) => {
-                        handleSubmit(e);
-                      }}
+                      disabled={loading}
                     >
-                      {loading ? "Loading... " : "Submit"}
+                      {loading ? "Loading... " : "Login"}
                     </Button>
                   </FormGroup>
                 </fieldset>

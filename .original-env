@@ -1,0 +1,2 @@
+REACT_APP_API_URL='https://www.codesforwebsurfers.com'
+REACT_APP_STRIPE_PUBLIC_KEY='pk_test_mWNiAKbBNadxrSa2caaTvyDu00GtW4zmzd'

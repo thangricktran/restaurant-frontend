@@ -9,10 +9,10 @@ import { Button, Card, CardBody, CardTitle, Badge } from "reactstrap";
 
 function Cart() {
   const { isAuthenticated } = React.useContext(UserContext);
-  const { total, cart, increaseQuantity, decreaseQuantity } 
+  const { total, cart, increaseQuantity, decreaseQuantity }
                             = React.useContext(CartContext);
 
-  if (cart.length === 0) {
+  if (!cart || cart.length === 0) {
     return (
       <div className="container-fluid">
         <Card style={{ padding: "10px 5px" }} className="cart">
@@ -25,12 +25,9 @@ function Cart() {
   return (
     <div className="container-fluid">
       <Card style={{ padding: "10px 5px" }} className="cart">
-        <CardTitle style={{ margin: 10 }}>Your Order:</CardTitle>
+        <CardTitle style={{ margin: 10, marginBottom: 2 }}>Cart Items:</CardTitle>
         <hr />
         <CardBody style={{ padding: 10 }}>
-          <div style={{ marginBottom: 6 }}>
-            <small>Items:</small>
-          </div>
           <div>
             {cart.map((item) => {
               return (

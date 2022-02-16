@@ -8,7 +8,7 @@ import { CartContext } from "../../context/cart";
 
 function Cart() {
   const { isAuthenticated } = useContext(UserContext);
-  const { cart, total, increaseQuantity, decreaseQuantity } = 
+  const { cart, total, increaseQuantity, decreaseQuantity } =
                 useContext(CartContext);
 
   if (cart.length === 0) {
@@ -24,12 +24,9 @@ function Cart() {
   return (
     <div>
       <Card style={{ padding: "10px 5px" }} className="cart">
-        <CardTitle style={{ margin: 10 }}>Your Order:</CardTitle>
+        <CardTitle style={{ margin: 10 }}>Cart Items:</CardTitle>
         <hr />
         <CardBody style={{ padding: 10 }}>
-          <div style={{ marginBottom: 6 }}>
-            <small>Items:</small>
-          </div>
           <div>
             {cart.map((item) => {
                 return (
@@ -75,7 +72,7 @@ function Cart() {
                   </div>
                 );
               })}
-              {cart.length > 0 && (  
+              {cart.length > 0 && (
                   <div>
                     <Badge style={{ width: 200, padding: 10 }} color="light">
                       <h5 style={{ fontWeight: 100, color: "gray" }}>Total:</h5>

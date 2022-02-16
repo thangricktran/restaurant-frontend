@@ -17,7 +17,7 @@ function Checkout() {
   const history = useHistory();
   // stripe loading recommended
   // eslint-disable-next-line
-  const [stripePromise, setStripePromise] = 
+  const [stripePromise, setStripePromise] =
     React.useState(() => loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY));
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function Checkout() {
       {isAuthenticated && cart.length > 0 && (
         <Row>
           <Col style={{ paddingRight: 0 }} sm={{ size: 3, order: 1, offset: 2 }}>
-            <h1 style={{ margin: 20 }}>Checkout</h1>
+            <h3 style={{ margin: '16px 16px 0px' }}>Checkout:</h3>
             <Cart />
           </Col>
           <Col style={{ paddingLeft: 5 }} sm={{ size: 6, order: 2 }}>
@@ -46,7 +46,7 @@ function Checkout() {
           <Col sm="12" md={{ size: 5, offset: 3 }}>
             <div>
               <div className="header2">
-                <h1 style={{ margin: 20 }}>You cart is empty</h1>
+                <h1 style={{ margin: 16 }}>You cart is empty.</h1>
                 <Link to="/" className="nav-link">
                    Continue Shopping
                 </Link>

@@ -24,19 +24,19 @@ function Restaurant() {
   const { addToCart } = React.useContext(CartContext);
   // const product = products.find(item => item.id === parseInt(id));
   const restaurant = restaurants.find(item => item.id === id);
-  
+
   if (!restaurant) {
     return <Loading />;
   }
   if (restaurant.dishes.length > 0) {
     const dishes = restaurant.dishes.map((res) => {
-      return { ...res, restaurant: restaurant.name };
+      return { ...res, restaurant: restaurant.name, restaurantId: restaurant._id };
     });
     restaurant.dishes = [...dishes];
 
     return (
       <div className="container-fluid">
-        <h1>{restaurant.name}</h1>
+        <h3>{restaurant.name}</h3>
         <Row>
           {restaurant.dishes.map((res) => (
             <Col xs="12" sm="6" lg="4" xl="4" style={{ padding: 0 }} key={res.id}>
@@ -44,8 +44,7 @@ function Restaurant() {
                 <CardImg
                   top={true}
                   style={{ height: 250 }}
-                  src={`${API_URL}${res.image.url}`
-                  }
+                  src={`${API_URL}${res.image.url}`}
                 />
                 <CardBody>
                   <CardTitle>{res.name}</CardTitle>

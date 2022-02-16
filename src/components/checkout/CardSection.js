@@ -4,11 +4,10 @@ import { CardElement } from "@stripe/react-stripe-js";
 
 function CardSection(props) {
   return (
-    <div>
+    <div style={{ border: '2px solid red' }}>
       <div>
-        <label htmlFor="card-element">Credit or debit card: 
+        <label htmlFor="card-element">Credit or debit card:
           <nobr>4242 4242 4242 4242</nobr></label>
-
         <div>
           <fieldset style={{ border: "none" }}>
             <div className="form-row">
@@ -16,6 +15,7 @@ function CardSection(props) {
                 <CardElement
                   options={{
                     style: { width: "100%", base: { fontSize: "18px" } },
+                    hidePostalCode: true,
                   }}
                 />
               </div>

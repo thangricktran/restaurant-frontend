@@ -1,5 +1,6 @@
 /* /pages/Register.js */
 import React, { useState } from "react";
+import { Controller, useForm } from 'react-hook-form';
 import {
   Container,
   Row,
@@ -16,21 +17,39 @@ import { UserContext } from "../context/user";
 import API_URL from "../utils/URL";
 
 const Register = () => {
-  const [data, setData] = useState({ email: "", username: "", password: "" });
+  const {
+    handleSubmit,
+    setValue,
+    control,
+    formState: { errors },
+  } = useForm();
+  const [stateData, setStateData] = useState({
+    email: "", username: "", password: "", confirmedPassword: ""
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { userLogin, showAlert } = React.useContext(UserContext);
   const history = useHistory();
- 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    showAlert({ msg: 'creating user data, please wait...' });
+
+  const handleRegisterSubmit = async ({ username, email, password, confirmedPassword }) => {
+    // e.preventDefault();
+    // showAlert({ msg: 'creating user data, please wait...' });
+
+    // console.log("pages/Register.js handleRegisterSubmit() username: \n", username);
+    // console.log("pages/Register.js handleRegisterSubmit() email: \n", email);
+    // console.log("pages/Register.js handleRegisterSubmit() password: \n", password);
+
+    if (password.trim() !== confirmedPassword.trim()) {
+      window.alert("Sorry, password and confirmed password \ndon't much. Please re-type them.");
+      return;
+    };
+
     setLoading(true);
     setError(null);
-    const userCredential = { 
-      username: data.username,
-      email: data.email, 
-      password: data.password 
+    const userCredential = {
+      username: username.trim(),
+      email: email,
+      password: password.trim()
     };
     await registerUser(userCredential)
       .then((res) => {
@@ -38,8 +57,8 @@ const Register = () => {
         const { jwt: token, user } = res.data;
         const { username } = user;
         userLogin({ username, token, user });
-        showAlert({ 
-          msg: `you are logged in: ${res.data.user.username}. shop away my friend.` 
+        showAlert({
+          msg: `You are logged in: ${res.data.user.username}. shop away my friend.`
         });
         setLoading(false);
         history.push("/");
@@ -47,7 +66,7 @@ const Register = () => {
       .catch((err) => {
         if (err.response.data) {
           setError(err.response.data);
-          showAlert({ 
+          showAlert({
             msg: err.response.data.message[0].messages[0].message,
             type: "danger"
           });
@@ -57,7 +76,12 @@ const Register = () => {
   };
 
   function onChange(event) {
-    setData({ ...data, [event.target.name]: event.target.value });
+    setStateData({ ...stateData, [event.target.name]: event.target.value });
+    setValue(event.target.name, event.target.value);
+  }
+  function handleForgotPassword(evt) {
+    evt.preventDefault();
+    history.push("/forgotpassword");
   }
 
   return (
@@ -83,43 +107,125 @@ const Register = () => {
                     </div>
                   );
                 })}
-              <Form>
+              <Form onSubmit={handleSubmit(handleRegisterSubmit)}>
                 <fieldset disabled={loading}>
                   <FormGroup>
                     <Label>Username:</Label>
-                    <Input
-                      disabled={loading}
-                      onChange={(event) => onChange(event)}
-                      value={data.username}
-                      type="text"
+                    <Controller
                       name="username"
-                      style={{ height: 50, fontSize: "1.2em" }}
-                    />
+                      control={control}
+                      defaultValue=""
+                      rules={{
+                        required: true,
+                        minLength: 2,
+                      }}
+                      render={({ field }) => (
+                        <Input
+                          {...field}
+                          id="username"
+                          disabled={loading}
+                          onChange={(event) => onChange(event)}
+                          value={stateData.username}
+                          type="text"
+                          name="username"
+                          style={{ height: 50, fontSize: "1.2em" }}
+                        />
+                      )}
+                    ></Controller>
+                    {errors.username
+                      ? errors.username.type === 'minLength'
+                        ? <span style={{color: 'red'}}>User Name length should be more than 1 characters.</span>
+                        : <span style={{color: 'red'}}>User Name is required.</span>
+                      : ''}
                   </FormGroup>
                   <FormGroup>
                     <Label>Email:</Label>
-                    <Input
-                      onChange={(event) => onChange(event)}
-                      value={data.email}
-                      type="email"
+                    <Controller
                       name="email"
-                      style={{ height: 50, fontSize: "1.2em" }}
-                    />
+                      control={control}
+                      defaultValue=""
+                      rules={{
+                        required: true,
+                        pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                      }}
+                      render={({ field }) => (
+                        <Input
+                          {...field}
+                          id="email"
+                          onChange={(event) => onChange(event)}
+                          value={stateData.email}
+                          type="email"
+                          name="email"
+                          style={{ height: 50, fontSize: "1.2em" }}
+                        />
+                      )}
+                    ></Controller>
+                    {errors.email
+                      ? errors.email.type === 'pattern'
+                        ? <span style={{color: 'red'}}>Email is not valid.</span>
+                        : <span style={{color: 'red'}}>Email is required.</span>
+                      : ''}
+                  </FormGroup>
+                  <FormGroup>
+                    <Label>Password:</Label>
+                    <Controller
+                      name="password"
+                      control={control}
+                      defaultValue=""
+                      rules={{
+                        required: true,
+                        minLength: 8,
+                      }}
+                      render={({ field }) => (
+                        <Input
+                          id="password"
+                          onChange={(event) => onChange(event)}
+                          value={stateData.password}
+                          type="password"
+                          name="password"
+                          style={{ height: 50, fontSize: "1.2em" }}
+                        />
+                      )}
+                    ></Controller>
+                    {errors.password
+                      ? errors.password.type === 'minLength'
+                        ? <span style={{color: 'red'}}>Password length should be more than 7.</span>
+                        : <span style={{color: 'red'}}>Password is required.</span>
+                      : ''}
                   </FormGroup>
                   <FormGroup style={{ marginBottom: 30 }}>
-                    <Label>Password:</Label>
-                    <Input
-                      onChange={(event) => onChange(event)}
-                      value={data.password}
-                      type="password"
-                      name="password"
-                      style={{ height: 50, fontSize: "1.2em" }}
-                    />
+                    <Label>Confirmed Password:</Label>
+                    <Controller
+                      name="confirmedPassword"
+                      control={control}
+                      defaultValue=""
+                      rules={{
+                        required: true,
+                        minLength: 8,
+                      }}
+                      render={({ field }) => (
+                        <Input
+                          id="confirmedPassword"
+                          onChange={(event) => onChange(event)}
+                          value={stateData.confirmedPassword}
+                          type="password"
+                          name="confirmedPassword"
+                          style={{ height: 50, fontSize: "1.2em" }}
+                        />
+                      )}
+                    ></Controller>
+                    {errors.confirmedPassword
+                      ? errors.confirmedPassword.type === 'minLength'
+                        ? <span style={{color: 'red'}}>Confirmed Password length should be more than 7.</span>
+                        : <span style={{color: 'red'}}>Confirmed Password is required.</span>
+                      : ''}
                   </FormGroup>
                   <FormGroup>
                     <span>
                       <Button
-                        className="btn btn-succeed btn-text-color">
+                        className="btn btn-succeed btn-text-color"
+                        onClick={handleForgotPassword}
+                      >
                         <small>Forgot Password?</small>
                       </Button>
                     </span>
@@ -127,11 +233,8 @@ const Register = () => {
                       style={{ float: "right", width: 120 }}
                       color="primary"
                       disabled={loading}
-                      onClick={(e) => {
-                        handleSubmit(e);
-                      }}
                     >
-                      {loading ? "Loading.." : "Submit"}
+                      {loading ? "Loading.." : "Register"}
                     </Button>
                   </FormGroup>
                 </fieldset>

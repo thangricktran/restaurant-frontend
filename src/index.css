@@ -1,12 +1,12 @@
-/* 
-====== 
+/*
+======
 Fonts
 ======
 */
 @import url("https://fonts.googleapis.com/css?family=Catamaran:300,400|Kaushan+Script&display=swap");
-/* 
-====== 
-Variables 
+/*
+======
+Variables
 ======
 */
 :root {
@@ -33,9 +33,9 @@ Variables
   --smallWidth: 85vw;
   --fullWidth: 1170px;
 }
-/* 
-====== 
-Global Styles 
+/*
+======
+Global Styles
 ======
 */
 * {
@@ -89,7 +89,7 @@ img {
   width: 80%;
   display: block;
 }
-/* 
+/*
 .signup_signin_img {
   width: 100px;
   height: 50px;
@@ -111,9 +111,9 @@ img {
   width: 10rem;
   margin: 0 auto;
 }
-/* 
-====== 
-Buttons 
+/*
+======
+Buttons
 ======
 */
 .btn,
@@ -159,8 +159,8 @@ Buttons
   box-shadow: var(--lightShadow);
   text-align: center;
 }
-/* 
-====== 
+/*
+======
 Header
 ======
 */
@@ -178,7 +178,7 @@ Header
   margin: 0 auto;
   width: 9rem;
 }
-.header ul {
+.header ul, .footer {
   display: flex;
   justify-content: space-between;
   width: var(--smallWidth);
@@ -261,8 +261,8 @@ Header
   overflow: hidden;
 }
 
-/* 
-====== 
+/*
+======
 Error
 ======
 */
@@ -274,8 +274,8 @@ Error
   text-align: center;
   text-transform: capitalize;
 }
-/* 
-====== 
+/*
+======
 Product List
 ======
 */
@@ -292,11 +292,14 @@ Product List
   margin-bottom: 3.5rem;
 }
 
-/* 
-====== 
+/*
+======
 Cart
 ======
 */
+.main-cart {
+  width: 100%;
+}
 .empty-cart {
   text-align: center;
   text-transform: capitalize;
@@ -314,12 +317,19 @@ Cart
 .cart-item {
   display: grid;
   align-items: center;
-  grid-template-columns: auto 1fr auto;
-  grid-column-gap: 1.5rem;
+  align-content: center;
+  grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
+  grid-column-gap: 1.0rem;
   margin: 1.5rem 0;
 }
 .cart-item img {
   width: 5rem;
+}
+.cart-item h3 {
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  letter-spacing: .1rem;
+  margin-bottom: 0;
 }
 .cart-item h4 {
   font-size: 0.85rem;
@@ -376,8 +386,8 @@ Cart
   color: rgba(97, 97, 97, 1);
 }
 
-/* 
-====== 
+/*
+======
 Cart Link
 ======
 */
@@ -399,7 +409,7 @@ Cart Link
   background: var(--primaryColor);
   /*  top: -10px;
   right: -10px;*/
-  top: -7px;
+  top: -2px;
   right: 12px;
   padding: 0rem 0.4rem;
   border-radius: 50%;
@@ -407,8 +417,8 @@ Cart Link
   color: var(--mainWhite);
 }
 
-/* 
-====== 
+/*
+======
 Login Form
 ======
 */
@@ -467,8 +477,8 @@ Login Form
   color: var(--darkGrey);
   border-color: var(--darkGrey);
 }
-/* 
-====== 
+/*
+======
 Login Button
 ======
 */
@@ -494,8 +504,8 @@ Login Button
     margin: 0 0.5rem;
   }
 }
-/* 
-====== 
+/*
+======
 Alert
 ======
 */
@@ -543,8 +553,8 @@ Alert
   cursor: pointer;
   line-height: 0;
 }
-/* 
-====== 
+/*
+======
 Checkout
 ======
 */
@@ -574,8 +584,8 @@ Checkout
 .checkout-form button {
   margin-top: 1rem;
 }
-/* 
-====== 
+/*
+======
 Scroll Button
 ======
 */
@@ -646,6 +656,7 @@ Scroll Button
   background: #fff;
   border-radius: 6px;
   margin-top: 90px;
+  margin-bottom: 40px;
 }
 .checkout_paper label {
   color: #6b7c93;

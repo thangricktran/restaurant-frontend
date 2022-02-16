@@ -54,14 +54,14 @@ function CartProvider({ children }) {
   // add to cart
   const addToCart = (dish) => {
     // const { id, image: {url}, title, price } = product;
-    const { id, name, image, price, restaurant } = dish;
+    const { id, name, image, price, restaurant, restaurantId } = dish;
     const item = [...cart].find(item => item.id === id);
     if (item) {
       increaseQuantity(id);
       return;
     } else {
       // const newItem = { id, image: url, title, price, quantity: 1 };
-      const newItem = { id, name, image, price, restaurant, quantity: 1 };
+      const newItem = { id, name, image, price, restaurantId, restaurant, quantity: 1 };
       // const newCart = [...cart, newDish];
       setCart([...cart, newItem]);
     }

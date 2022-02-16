@@ -6,6 +6,7 @@ import {
   Col,
 } from "reactstrap";
 import { UserContext } from "../../context/user";
+import moment from 'moment';
 
 function OrderHistoryCmpt({order}) {
   const { isAuthenticated } = useContext(UserContext);
@@ -35,7 +36,7 @@ function OrderHistoryCmpt({order}) {
           <div className="paper">
             <div className="header">
               Order Receipt Id: {order.id} <br />
-              Order Date: {order.createdAt}
+              Order Date: {moment(order.createdAt).format('LLLL')}
             </div>
             <section className="wrapper">
             {order.dishes.map((dish,index) => {
