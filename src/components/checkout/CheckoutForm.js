@@ -251,7 +251,7 @@ function CheckoutForm() {
                   </div>
                   <div className="order-button-wrapper">
                       <Button
-                        style={{ float: "right", width: 120 }}
+                        style={{ width: 120 }}
                         color="primary"
                         disabled={loading}
                       >

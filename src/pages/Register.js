@@ -107,7 +107,7 @@ const Register = () => {
                     </div>
                   );
                 })}
-              <Form onSubmit={handleSubmit(handleRegisterSubmit)}>
+              <Form onSubmit={handleSubmit(handleRegisterSubmit)} noValidate>
                 <fieldset disabled={loading}>
                   <FormGroup>
                     <Label>Username:</Label>
@@ -179,6 +179,7 @@ const Register = () => {
                       render={({ field }) => (
                         <Input
                           id="password"
+                          autoComplete="on"
                           onChange={(event) => onChange(event)}
                           value={stateData.password}
                           type="password"
@@ -206,6 +207,7 @@ const Register = () => {
                       render={({ field }) => (
                         <Input
                           id="confirmedPassword"
+                          autoComplete="on"
                           onChange={(event) => onChange(event)}
                           value={stateData.confirmedPassword}
                           type="password"

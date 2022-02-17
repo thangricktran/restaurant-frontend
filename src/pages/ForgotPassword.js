@@ -20,13 +20,13 @@ const ForgotPassword = () => {
   const {
     handleSubmit,
     setValue,
-    getValues,
+    // getValues,
     control,
     formState: { errors },
   } = useForm();
-  // const [stateData, setStateData] = useState({
-  //   email: "", username: "", password: "", confirmedPassword: ""
-  // });
+  const [stateData, setStateData] = useState({
+    email: ""
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { showAlert } = React.useContext(UserContext);
@@ -49,7 +49,7 @@ const ForgotPassword = () => {
         //   msg: `You are logged in: ${res.data.user.username}. shop away my friend.`
         // });
 
-        console.log("pages/ForgotPassword.js handleForgotPasswordSubmit() res.data: \n", res.data);
+        // console.log("pages/ForgotPassword.js handleForgotPasswordSubmit() res.data: \n", res.data);
         setLoading(false);
         // history.push("/");
       })
@@ -66,6 +66,7 @@ const ForgotPassword = () => {
   };
 
   function onChange(event) {
+    setStateData({ ...stateData, [event.target.name]: event.target.value });
     setValue(event.target.name, event.target.value);
   }
 
@@ -109,7 +110,7 @@ const ForgotPassword = () => {
                           {...field}
                           id="email"
                           onChange={(event) => onChange(event)}
-                          value={getValues("email")}
+                          value={stateData.email}
                           type="email"
                           name="email"
                           style={{ height: 50, fontSize: "1.2em" }}
@@ -123,19 +124,15 @@ const ForgotPassword = () => {
                       : ''}
                   </FormGroup>
                   <FormGroup>
-                    <span>
-                      <Button
-                        className="btn btn-succeed btn-text-color">
-                        <small>Forgot Password?</small>
-                      </Button>
-                    </span>
+                    <div style={{ margin: '0 auto', textAlign: 'center' }}>
                     <Button
-                      style={{ float: "right", width: 120 }}
+                      style={{ width: 120 }}
                       color="primary"
                       disabled={loading}
                     >
                       {loading ? "Loading.." : "Submit"}
                     </Button>
+                    </div>
                   </FormGroup>
                 </fieldset>
               </Form>
