@@ -108,7 +108,7 @@ export default function Login() {
                     </div>
                   );
                 })}
-              <Form onSubmit={handleSubmit(handleLoginSubmit)}>
+              <Form onSubmit={handleSubmit(handleLoginSubmit)} noValidate>
                 <fieldset disabled={loading}>
                   <FormGroup>
                     <Label>Email:</Label>
@@ -151,6 +151,7 @@ export default function Login() {
                       render={({ field }) => (
                         <Input
                           id="password"
+                          autoComplete="on"
                           onChange={(event) => onChange(event)}
                           value={stateData.password}
                           type="password"
