@@ -322,11 +322,20 @@ Cart
   grid-column-gap: 1.0rem;
   margin: 1.5rem 0;
 }
+/* @media screen and (max-width: 576px) {
+  .cart-item {
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
+    max-width: 450px;
+    width: 550px;
+    x-overflow: hidden;
+  }
+} */
 .cart-item img {
   width: 5rem;
 }
 .cart-item h3 {
-  font-size: 1.2rem;
+  font-size: .90rem;
   text-transform: capitalize;
   letter-spacing: .1rem;
   margin-bottom: 0;
@@ -690,11 +699,7 @@ Scroll Button
   box-sizing: border-box;
   padding: 0 5px;
 }
-.checkout_paper label {
-  color: #6b7c93;
-  font-weight: 300;
-  letter-spacing: 0.025em;
-}
+
 .checkout_paper button {
   white-space: nowrap;
   border: 0;
