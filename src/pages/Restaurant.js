@@ -35,7 +35,7 @@ function Restaurant() {
     restaurant.dishes = [...dishes];
 
     return (
-      <div className="container-fluid">
+      <div className="container-fluid with_fixed_header">
         <h3>{restaurant.name}</h3>
         <Row>
           {restaurant.dishes.map((res) => (
@@ -77,6 +77,6 @@ function Restaurant() {
       </div>
     );
   }
-  return <h1>Add Dishes</h1>;
+  return <div className="with_fixed_header"><h1>No Dishes founded, sorry.</h1></div>;
 }
 export default Restaurant;

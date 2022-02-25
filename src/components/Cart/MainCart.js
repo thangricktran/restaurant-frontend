@@ -15,22 +15,21 @@ function MainCart() {
 
   if (!cart || cart.length === 0) {
     return (
-      <div className="container-fluid">
-        <Card style={{ padding: "10px 5px" }} className="main-cart">
-          <CardTitle style={{ margin: 10 }}>Your Cart Is Empty.</CardTitle>
+      <div className="container-fluid with_fixed_header main-cart-mt">
+        <Card style={{ padding: "15px 5px 5px" }} className="main-cart">
+          <CardTitle>Your Cart Is Empty.</CardTitle>
         </Card>
       </div>
     );
   }
 
   return (
-    <div className="container-fluid">
-      <Card style={{ padding: "10px 5px" }} className="main-cart">
-        <CardTitle style={{ margin: 10, marginBottom: 2 }}>Cart Items:</CardTitle>
+    <div className="container-fluid with_fixed_header main-cart-mt">
+      <Card style={{ padding: "15px 5px 5px" }} className="main-cart">
+        <CardTitle>Cart Items:</CardTitle>
         <hr style={{ margin: 0 }} />
         <CardBody style={{ marginTop: 0, padding: 10 }}>
           <div
-            className="items-one"
             style={{ marginTop: 0, marginBottom: 15, width: '100%' }}
           >
             <div className="cart-item">
@@ -49,6 +48,8 @@ function MainCart() {
                           top={true}
                           style={{ width: 60, height: 60 }}
                           src={`${API_URL}${item.image.url}`}
+                          title={item.restaurant}
+                          alt={item.restaurant}
                         />
                       </Link>
                     </div>

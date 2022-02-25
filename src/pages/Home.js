@@ -7,7 +7,7 @@ export default function Home() {
   const [query, updateQuery] = React.useState("");
   
   return (
-    <div className="container-fluid">
+    <div className="container-fluid with_fixed_header">
       <Row>
         <Col>
           <div className="search">

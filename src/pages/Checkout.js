@@ -27,7 +27,7 @@ function Checkout() {
   }, [isAuthenticated, history]);
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid with_fixed_header">
       {isAuthenticated && cart.length > 0 && (
         <Row>
           <Col style={{ paddingRight: 0 }} sm={{ size: 3, order: 1, offset: 2 }}>

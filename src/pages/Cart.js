@@ -12,7 +12,7 @@ import MainCart from "../components/Cart/MainCart";
 function CartPage() {
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid with_fixed_header">
       <Row className="justify-content-center">
         <Col xs="12" sm="8" lg="8" xl="8" style={{ padding: 0, margin: "0 5px", }}>
           <div style={{ padding: 0, margin: "0" }}>

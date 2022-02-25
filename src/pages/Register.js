@@ -85,7 +85,7 @@ const Register = () => {
   }
 
   return (
-    <Container>
+    <Container className="with_fixed_header">
       <Row>
         <Col sm="12" md={{ size: 5, offset: 3 }}>
           <div className="signup_paper">

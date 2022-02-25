@@ -10,7 +10,7 @@ export const RestaurantContext = React.createContext();
 export default function RestaurantProvider({ children }) {
   const [loading, setLoading] = React.useState(false);
   const [restaurants, setRestaurants] = React.useState([]);
-  
+
   React.useEffect(() => {
     setLoading(true);
     axios.get(`${url}/restaurants`)
@@ -22,7 +22,7 @@ export default function RestaurantProvider({ children }) {
   }, []);
 
   return (
-    <RestaurantContext.Provider 
+    <RestaurantContext.Provider
       value={{
         loading,
         restaurants,
@@ -32,4 +32,3 @@ export default function RestaurantProvider({ children }) {
     </RestaurantContext.Provider>
   );
 };
-

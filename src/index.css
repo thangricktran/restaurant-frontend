@@ -63,7 +63,10 @@ h6 {
   letter-spacing: var(--mainSpacing);
 }
 .username {
-  color: #fff;
+  line-height: 2.2;
+  font-size: 2rem;
+  font-weight: 100;
+  color: #ffffff;
 }
 p {
   margin-bottom: 1.25rem;
@@ -129,10 +132,26 @@ Buttons
   cursor: pointer;
   font-size: 0.8rem;
   background: transparent;
+  outline: none;
+  outline-style: none;
 }
 .btn:hover {
   background: var(--primaryColor);
   color: var(--mainWhite);
+  border: 2px solid var(--primaryColor);
+  text-decoration: none;
+  outline: none;
+  outline-style: none;
+}
+.btn:focus,
+.btn-white:focus,
+.btn-primary:focus {
+  background: var(--primaryColor);
+  color: var(--mainWhite);
+  border: 2px solid var(--primaryColor);
+  text-decoration: none;
+  outline: none;
+  outline-style: none;
 }
 .btn-white {
   background: transparent;
@@ -164,6 +183,18 @@ Buttons
 Header
 ======
 */
+.header_fixed_position {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0 auto;
+  width: 100%;
+  z-index: 10;
+  opacity: 1;
+}
+.with_fixed_header {
+  margin-top: 64px;
+}
 .header {
   padding: 2rem 0;
 }
@@ -178,7 +209,8 @@ Header
   margin: 0 auto;
   width: 9rem;
 }
-.header ul, .footer {
+.header ul,
+.footer {
   display: flex;
   justify-content: space-between;
   width: var(--smallWidth);
@@ -211,6 +243,101 @@ Header
     margin: 0 0.5rem;
   }
 }
+
+/* Navbar Hamburger */
+.nav-item-li {
+  list-style-type: none;
+}
+#close-icon {
+  width: 30px;
+  height: 35px;
+  position: relative;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+#close-icon span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: #d3531a;
+  border-radius: 2px;
+  opacity: 1;
+  left: 0;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.25s ease-in-out;
+  -moz-transition: 0.25s ease-in-out;
+  -o-transition: 0.25s ease-in-out;
+  transition: 0.25s ease-in-out;
+  margin-top: 5px;
+}
+
+/* Close Icon */
+#close-icon {
+  padding: 2px;
+}
+#close-icon span:nth-child(1) {
+  top: 0px;
+  -webkit-transform-origin: left center;
+  -moz-transform-origin: left center;
+  -o-transform-origin: left center;
+  transform-origin: left center;
+}
+#close-icon span:nth-child(2) {
+  top: 18px;
+  -webkit-transform-origin: left center;
+  -moz-transform-origin: left center;
+  -o-transform-origin: left center;
+  transform-origin: left center;
+}
+#close-icon span:nth-child(3) {
+  top: 36px;
+  -webkit-transform-origin: left center;
+  -moz-transform-origin: left center;
+  -o-transform-origin: left center;
+  transform-origin: left center;
+}
+#close-icon.open span:nth-child(1) {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  top: 1px;
+  left: 1px;
+  position: absolute;
+}
+#close-icon.open span:nth-child(2) {
+  width: 0%;
+  opacity: 0;
+}
+#close-icon.open span:nth-child(3) {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  top: 22px;
+  left: 1px;
+  position: absolute;
+}
+button:focus {
+  outline: none !important;
+}
+.navbar-light .navbar-toggler {
+  border-color: none;
+  border: 0px;
+}
+/* END Navbar Hamburger */
+
 .paper {
   /* border: 1px solid lightgray; */
   border-right: 1px solid lightgray;
@@ -222,7 +349,7 @@ Header
   margin-top: 50px;
   padding-top: 0px;
 }
-/* SIGUP HEADER */
+/* SIGNUP HEADER */
 .signup_paper {
   /* border: 1px solid lightgray; */
   border-right: 1px solid lightgray;
@@ -300,6 +427,9 @@ Cart
 .main-cart {
   width: 100%;
 }
+.main-cart-mt {
+  margin-top: 0.5rem;
+}
 .empty-cart {
   text-align: center;
   text-transform: capitalize;
@@ -319,7 +449,7 @@ Cart
   align-items: center;
   align-content: center;
   grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
-  grid-column-gap: 1.0rem;
+  grid-column-gap: 1rem;
   margin: 1.5rem 0;
 }
 .cart-item img {
@@ -328,12 +458,12 @@ Cart
 .cart-item h3 {
   font-size: 1.2rem;
   text-transform: capitalize;
-  letter-spacing: .1rem;
+  letter-spacing: 0.1rem;
   margin-bottom: 0;
 }
 @media screen and (max-width: 678px) {
   .cart-item h3 {
-    font-size: .9rem;
+    font-size: 0.9rem;
     font-weight: 800;
   }
 }

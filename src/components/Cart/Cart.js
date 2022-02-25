@@ -14,25 +14,24 @@ function Cart() {
 
   if (!cart || cart.length === 0) {
     return (
-      <div className="container-fluid">
+      <div className="container-fluid with_fixed_header">
         <Card style={{ padding: "10px 5px" }} className="cart">
-          <CardTitle style={{ margin: 10 }}>Your Cart Is Empty.</CardTitle>
+          <CardTitle style={{ margin: "10px 10px 2px 10px" }}>Your Cart Is Empty.</CardTitle>
         </Card>
       </div>
     );
   }
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid with_fixed_header">
       <Card style={{ padding: "10px 5px" }} className="cart">
-        <CardTitle style={{ margin: 10, marginBottom: 2 }}>Cart Items:</CardTitle>
+        <CardTitle style={{ margin: "10px 10px 2px 10px" }}>Cart Items:</CardTitle>
         <hr />
         <CardBody style={{ padding: 10 }}>
           <div>
-            {cart.map((item) => {
+            {Array.isArray(cart) && cart.length > 0 && cart.map((item) => {
               return (
                 <div
-                  className="items-one"
                   style={{ marginBottom: 15 }}
                   key={item.id}
                 >

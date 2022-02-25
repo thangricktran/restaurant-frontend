@@ -73,7 +73,7 @@ function OrderHistory() {
 
   if (isAuthenticated && !loading && !error) {
     return (
-      <Container>
+      <Container className="with_fixed_header">
 {/*
         <Row>
           <Col sm="12" md={{ size: 5, offset: 3 }}>
@@ -158,7 +158,7 @@ function OrderHistory() {
     // No order to display, send user home
     //return to home;
     return (
-      <Container>
+      <Container className="with_fixed_header">
         <Row>
           <Col sm="12" md={{ size: 5, offset: 3 }}>
             <div className="paper">
