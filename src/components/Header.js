@@ -29,7 +29,7 @@ export default function Header() {
           <Navbar className="navbar navbar-dark bg-dark" expand="md">
             <NavItem className="nav-item-li">
               <Link to="/" className="navbar-brand">
-                <span className="nav-link-font">Home</span>
+                <span className="nav-link-font" onClick={toggle}>Home</span>
               </Link>
             </NavItem>
             <NavItem className="ml-auto nav-item-li custom-inner-item">
@@ -47,7 +47,9 @@ export default function Header() {
             <Collapse isOpen={isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem className="nav-item-li collapse-nav-item-line-height">
-                  <CartLink />
+                  <span onClick={toggle}>
+                    <CartLink />
+                  </span>
                 </NavItem>
                 {isAuthenticated && (
                 <NavItem className="collapse-nav-item-line-height">
