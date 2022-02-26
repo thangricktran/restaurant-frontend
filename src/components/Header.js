@@ -14,34 +14,27 @@ import {
   // DropdownItem,
   // UncontrolledDropdown,
 } from 'reactstrap';
-import ReactResizeDetector from 'react-resize-detector';
 import CartLink from "./Cart/CartLink";
 // import LoginLink from "../components/LoginLink";
 import { UserContext } from "../context/user";
-import { CartContext } from "../context/cart";
 
 export default function Header() {
   const { user, isAuthenticated, userLogout } = React.useContext(UserContext);
-  const { cartItems } = React.useContext(CartContext);
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
   return (
     <div className="header_fixed_position">
       <div id="header-container">
-        <ReactResizeDetector  handleWidth handleHeight>
-        {({ width, height }) => 
-
           <Navbar className="navbar navbar-dark bg-dark" expand="md">
             <NavItem className="nav-item-li">
               <Link to="/" className="navbar-brand">
                 <span className="nav-link-font">Home</span>
               </Link>
             </NavItem>
-            {width < 768 && (
-            <NavItem className="ml-auto nav-item-li">
+            <NavItem className="ml-auto nav-item-li custom-inner-item">
               <CartLink />
-            </NavItem>)}
+            </NavItem>
             <NavbarToggler onClick={toggle} style={{borderColor: "#ffffff"}}>
             {/* Close mark */}
             <div id="close-icon" className={isOpen ? "open" : "" }>
@@ -53,16 +46,9 @@ export default function Header() {
             </NavbarToggler>
             <Collapse isOpen={isOpen} navbar>
               <Nav className="ml-auto" navbar>
-                {width > 767 && (
-                <NavItem>
-                  {/* <CartLink /> */}
-                  <div className="cart-link-container">
-                    <Link to="/cart" className="nav-link cart-word-color">
-                      <span className="nav-link-font">Cart</span>
-                    </Link>
-                    <span className="cart-link-total">{cartItems}</span>
-                  </div>
-                </NavItem>)}
+                <NavItem className="nav-item-li collapse-nav-item-line-height">
+                  <CartLink />
+                </NavItem>
                 {isAuthenticated && (
                 <NavItem className="collapse-nav-item-line-height">
                   <Link to="/orderhistory" className="nav-link" onClick={toggle}>
@@ -97,10 +83,8 @@ export default function Header() {
               </Nav>
             </Collapse>
           </Navbar>
-        }
-        </ReactResizeDetector>
       </div>
       {/** <Container>{props.children}</Container> */  }
     </div>
-  );
+ );
 };

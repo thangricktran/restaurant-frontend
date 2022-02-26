@@ -7,7 +7,9 @@ export default function CartLink() {
 
   return (
     <div className="cart-link-container">
-      <Link to="/cart" className="nav-link cart-word-color">cart</Link>
+      <Link to="/cart" className="nav-link cart-word-color">
+        <span className="nav-link-font">Cart</span>
+      </Link>
       <span className="cart-link-total">{cartItems}</span>
     </div>
   );
