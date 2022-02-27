@@ -30,7 +30,13 @@ export default function Header() {
           <Navbar className="navbar navbar-dark bg-dark" expand="sm">
             <NavItem className="nav-item-li">
               <Link to="/" className="navbar-brand">
-                <span className="nav-link-font" onClick={toggle}>Home</span>
+                <span className="nav-link-font" 
+                  onClick={() => 
+                    (isOpen === true) && setIsOpen(false)
+                  }
+                >
+                  Home
+                </span>
               </Link>
             </NavItem>
             <NavItem className="ml-auto nav-item-li custom-inner-item">

@@ -198,7 +198,7 @@ Header
   position: fixed;
   top: 0;
   left: 0;
-  margin: 0 auto;
+  margin: 0 0;
   width: 100vw;
   z-index: 10;
   opacity: 1;
@@ -256,6 +256,9 @@ Header
 }
 
 /* Navbar Hamburger */
+.navbar-container-dimen {
+  height: 64px;
+}
 .nav-item-li {
   list-style-type: none;
 }
