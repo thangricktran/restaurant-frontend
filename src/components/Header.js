@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Collapse,
+  // Container,
   Navbar,
   NavbarToggler,
   // NavbarBrand,
@@ -26,7 +27,7 @@ export default function Header() {
   return (
     <div className="header_fixed_position">
       <div id="header-container">
-          <Navbar className="navbar navbar-dark bg-dark" expand="md">
+          <Navbar className="navbar navbar-dark bg-dark" expand="sm">
             <NavItem className="nav-item-li">
               <Link to="/" className="navbar-brand">
                 <span className="nav-link-font" onClick={toggle}>Home</span>
