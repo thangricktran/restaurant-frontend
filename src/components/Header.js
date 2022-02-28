@@ -29,12 +29,12 @@ export default function Header() {
       <div id="header-container">
           <Navbar className="navbar navbar-dark bg-dark" expand="sm">
             <NavItem className="nav-item-li">
-              <Link to="/" className="navbar-brand">
-                <span className="nav-link-font" 
-                  onClick={() => 
-                    (isOpen === true) && setIsOpen(false)
-                  }
-                >
+              <Link to="/" className="navbar-brand"
+                onClick={() => 
+                  (isOpen === true) && setIsOpen(false)
+                }
+              >
+                <span className="nav-link-font">
                   Home
                 </span>
               </Link>
@@ -54,13 +54,17 @@ export default function Header() {
             <Collapse isOpen={isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem className="nav-item-li collapse-nav-item-line-height">
-                  <span onClick={toggle}>
+                  <span
+                    onClick={() => isOpen && setIsOpen(false)}
+                  >
                     <CartLink />
                   </span>
                 </NavItem>
                 {isAuthenticated && (
                 <NavItem className="collapse-nav-item-line-height">
-                  <Link to="/orderhistory" className="nav-link" onClick={toggle}>
+                  <Link to="/orderhistory" className="nav-link"
+                    onClick={() => isOpen && setIsOpen(false)}
+                  >
                     <span className="nav-link-font">View Orders</span>
                   </Link>
                 </NavItem>
@@ -69,7 +73,9 @@ export default function Header() {
                   {isAuthenticated ? (
                     <span className="username nav-link-font">{user.username}</span>
                   ) : (
-                    <Link to="/register" className="nav-link" onClick={toggle}>
+                    <Link to="/register" className="nav-link" 
+                      onClick={() => isOpen && setIsOpen(false)}
+                    >
                       <span className="nav-link-font">Sign up</span>
                     </Link>
                   )}
@@ -78,13 +84,19 @@ export default function Header() {
                   {isAuthenticated ? (
                     <Link to="/" className="nav-link"
                       onClick={() => {
-                          userLogout()
-                        }}
+                        userLogout()
+                      }}
                     >
-                      <span className="nav-link-font" onClick={toggle}>Logout</span>
+                      <span className="nav-link-font"
+                        onClick={() => isOpen && setIsOpen(false)}
+                      >
+                        Logout
+                      </span>
                     </Link>
                   ) : (
-                    <Link to="/login" className="nav-link" onClick={toggle}>
+                    <Link to="/login" className="nav-link"
+                      onClick={() => isOpen && setIsOpen(false)}
+                    >
                       <span className="nav-link-font">Sign in</span>
                     </Link>
                   )}
