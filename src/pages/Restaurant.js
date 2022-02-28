@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { RestaurantContext } from "../context/restaurants";
 import { CartContext } from "../context/cart";
 import Loading from "../components/Loading";
-import Cart from "../components/Cart/Cart";
+// import Cart from "../components/Cart/Cart";
 import API_URL from '../utils/URL';
 import {
   Button,
@@ -35,7 +35,7 @@ function Restaurant() {
     restaurant.dishes = [...dishes];
 
     return (
-      <div className="container-fluid with_fixed_header">
+      <div className="container-fluid with_fixed_header" style={{marginBottom: 30}}>
         <h3>{restaurant.name}</h3>
         <Row>
           {restaurant.dishes.map((res) => (
@@ -67,13 +67,13 @@ function Restaurant() {
             </Col>
           ))}
         </Row>
-        <Row>
+        {/* <Row>
           <Col xs="12" sm="6" lg="4" xl="4" style={{ padding: 0, margin: "0 5px" }}>
             <div style={{ padding: 0, margin: "0" }}>
               <Cart />
             </div>
           </Col>
-        </Row>
+        </Row> */}
       </div>
     );
   }
